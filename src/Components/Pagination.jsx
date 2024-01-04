@@ -36,6 +36,13 @@ const MyPagination = ({data,setUsers,count}) => {
           }
     }
 
+    const handleNavigatePage = (idx) => {
+      const selcetedUsers = data.slice(idx * count, idx * count + count);
+      setUsers(selcetedUsers);
+      console.log(data, selcetedUsers);
+      setSelectedIndex(idx);
+    };
+
 
   return (
     <div>
@@ -71,15 +78,7 @@ const MyPagination = ({data,setUsers,count}) => {
               background: selectedIndex == idx ? "lightblue" : "none",
               cursor: "pointer",
             }}
-            onClick={() => {
-              const selcetedUsers = data.slice(
-                idx * count,
-                idx * count + count
-              );
-              setUsers(selcetedUsers);
-              console.log(data, selcetedUsers);
-              setSelectedIndex(idx);
-            }}
+            onClick={()=>handleNavigatePage(idx)}
           >
             {idx + 1}
           </button>

@@ -70,13 +70,110 @@ function UsersList() {
         return newUsers;
       });
   };
+
+  const handleDeleteSelected = () => {
+    setFilteredData((prevFilteredData) => {
+      let newFilteredData = prevFilteredData.filter((el) => {
+        return !el.checked;
+      });
+      setUsers(newFilteredData.slice(0, 10));
+      return newFilteredData;
+    });
+  };
+
+  const handleRoleChange = (e,user) => {
+    setFilteredData((prevFilteredData) => {
+      let newFilteredData = prevFilteredData.map((el) => {
+        if (el.id == user.id) el.role = e.target.value;
+        return el;
+      });
+      return newFilteredData;
+    });
+    setUsers((prevUser) => {
+      let newUsers = prevUser.map((el, idx) => {
+        if (el.id == user.id) el.role = e.target.value;
+        return el;
+      });
+
+      return newUsers;
+    });
+  };
+
+  const handleEmailChange = (e,user) => {
+    setFilteredData((prevFilteredData) => {
+      let newFilteredData = prevFilteredData.map((el) => {
+        if (el.id == user.id) el.email = e.target.value;
+        return el;
+      });
+      return newFilteredData;
+    });
+    setUsers((prevUser) => {
+      let newUsers = prevUser.map((el, idx) => {
+        if (el.id == user.id) el.email = e.target.value;
+        return el;
+      });
+      return newUsers;
+    });
+  };
+
+  const handleNameChange = (e,user) => {
+    setFilteredData((prevFilteredData) => {
+      let newFilteredData = prevFilteredData.map((el) => {
+        if (el.id == user.id) el.name = e.target.value;
+        return el;
+      });
+      return newFilteredData;
+    });
+    setUsers((prevUser) => {
+      let newUsers = prevUser.map((el, idx) => {
+        if (el.id == user.id) el.name = e.target.value;
+        return el;
+      });
+      return newUsers;
+    });
+  };
+
+  const handleCheckUser = (e,user) => {
+    setFilteredData((prevFilteredData) => {
+      let newFilteredData = prevFilteredData.map((el) => {
+        if (el.id == user.id) el.checked = e.target.checked;
+        return el;
+      });
+      return newFilteredData;
+    });
+    setUsers((prevUser) => {
+      let newUsers = prevUser.map((el, idx) => {
+        if (el.id == user.id) el.checked = e.target.checked;
+        return el;
+      });
+      return newUsers;
+    });
+  };
+
+  const handleCheckAll = (e) => {
+    setFilteredData((prevFilteredData) => {
+      let newFilteredData = prevFilteredData.map((el) => {
+        el.checked = e.target.checked;
+        return el;
+      });
+      return newFilteredData;
+    });
+    setUsers((prevUser) => {
+      let newUsers = prevUser.map((el, idx) => {
+        el.checked = e.target.checked;
+        return el;
+      });
+      return newUsers;
+    });
+  };
   
   return (
-    <div className="box">
+    <div style={{fontSize:'18px'}}>
       <h1>ADMIN UI</h1>
       <br />
-      <input
-        style={{ border: "2px solid lightblue" }}
+      <div style={{}}>
+         <input
+        style={{ border: "2px solid lightblue",fontSize:'20px', width:'90%' }}
         type="text"
         name="name"
         placeholder=" Search by any field "
@@ -96,27 +193,14 @@ function UsersList() {
           if (newFilteredData) setUsers(newFilteredData.slice(0, 10));
         }}
       />
+      </div>
+     
 
-      <table className="mytable">
+      <table style={{width:'90%',border:'1px solid lightblue',margin:'auto'}} className="mytable">
         <tr>
           <th>
             <input
-              onChange={(e) => {
-                setFilteredData((prevFilteredData) => {
-                  let newFilteredData = prevFilteredData.map((el) => {
-                    el.checked = e.target.checked;
-                    return el;
-                  });
-                  return newFilteredData;
-                });
-                setUsers((prevUser) => {
-                  let newUsers = prevUser.map((el, idx) => {
-                    el.checked = e.target.checked;
-                    return el;
-                  });
-                  return newUsers;
-                });
-              }}
+              onChange={(e)=>handleCheckAll(e)}
               type="checkbox"
             />{" "}
           </th>
@@ -131,22 +215,7 @@ function UsersList() {
             <input
               type="checkbox"
               checked={user.checked}
-              onChange={(e) => {
-                setFilteredData((prevFilteredData) => {
-                  let newFilteredData = prevFilteredData.map((el) => {
-                    if (el.id == user.id) el.checked = e.target.checked;
-                    return el;
-                  });
-                  return newFilteredData;
-                });
-                setUsers((prevUser) => {
-                  let newUsers = prevUser.map((el, idx) => {
-                    if (el.id == user.id) el.checked = e.target.checked;
-                    return el;
-                  });
-                  return newUsers;
-                });
-              }}
+              onChange={(e)=>handleCheckUser(e,user)}
             />
 
             <td>
@@ -155,22 +224,7 @@ function UsersList() {
                 <input
                   type="text"
                   value={user.name}
-                  onChange={(e) => {
-                    setFilteredData((prevFilteredData) => {
-                      let newFilteredData = prevFilteredData.map((el) => {
-                        if (el.id == user.id) el.name = e.target.value;
-                        return el;
-                      });
-                      return newFilteredData;
-                    });
-                    setUsers((prevUser) => {
-                      let newUsers = prevUser.map((el, idx) => {
-                        if (el.id == user.id) el.name = e.target.value;
-                        return el;
-                      });
-                      return newUsers;
-                    });
-                  }}
+                  onChange={(e)=>handleNameChange(e,user)}
                 />
               ) : (
                 user.name
@@ -182,45 +236,14 @@ function UsersList() {
                 <input
                   type="email"
                   value={user.email}
-                  onChange={(e) => {
-                    setFilteredData((prevFilteredData) => {
-                      let newFilteredData = prevFilteredData.map((el) => {
-                        if (el.id == user.id) el.email = e.target.value;
-                        return el;
-                      });
-                      return newFilteredData;
-                    });
-                    setUsers((prevUser) => {
-                      let newUsers = prevUser.map((el, idx) => {
-                        if (el.id == user.id) el.email = e.target.value;
-                        return el;
-                      });
-                      return newUsers;
-                    });
-                  }}
+                  onChange={(e)=>handleEmailChange(e,user)}
                 />
               ) : (
                 user.email
               )}{" "}
             </td>
             <td> {user.edit?<select value={user.role}
-             onChange={(e)=>{
-                  setFilteredData((prevFilteredData) => {
-                    let newFilteredData = prevFilteredData.map((el) => {
-                      if (el.id == user.id) el.role = e.target.value;
-                      return el;
-                    });
-                    return newFilteredData;
-                  });
-                  setUsers((prevUser) => {
-                    let newUsers = prevUser.map((el, idx) => {
-                      if (el.id == user.id)el.role = e.target.value;
-                      return el;
-                    });
-          
-                    return newUsers;
-                  });
-             }}
+             onChange={(e)=>handleRoleChange(e,user)}
             >
                <option value="member">member</option>
                <option value="admin">admin</option>
@@ -247,15 +270,7 @@ function UsersList() {
 
         <button
           className="deleteSelected"
-          onClick={() => {
-            setFilteredData((prevFilteredData) => {
-              let newFilteredData = prevFilteredData.filter((el) => {
-                return !el.checked;
-              });
-              setUsers(newFilteredData.slice(0, 10));
-              return newFilteredData;
-            });
-          }}
+          onClick={handleDeleteSelected}
           style={{ border: "none", color: "red",cursor:'pointer' }}
         >
           Delete Selected
