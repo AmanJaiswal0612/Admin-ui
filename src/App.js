@@ -1,12 +1,12 @@
 import "./App.css";
-import UsersList from "./Components/UsersList";
+import Users from "./Components/Users";
 import { ErrorBoundary } from "./ErrorHandling/ErrorBoundary";
 
 function App() {
   return (
     <div className="App">
       <ErrorBoundary>
-        <UsersList />
+        <Users />
       </ErrorBoundary>
     </div>
   );

@@ -1,0 +1,14 @@
+
+.mytable tr:hover {
+  background-color: lightblue;
+}
+
+
+
+/* Small screens (phones, 600px and below) */
+@media only screen and (max-width: 600px) {
+  .mytable {
+      width: 50%;
+      font-size: 8px;
+    }
+}

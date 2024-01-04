@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./UsersList.css";
+import "./Users.css";
 import "antd/dist/antd.css";
 import { AiFillDelete, AiFillEdit, AiFillSave } from "react-icons/ai";
 import MyPagination from "./Pagination";
@@ -168,117 +168,144 @@ function UsersList() {
   };
   
   return (
-    <div style={{fontSize:'18px'}}>
+    <div style={{ fontSize: "18px" }}>
       <h1>ADMIN UI</h1>
       <br />
       <div style={{}}>
-         <input
-        style={{ border: "2px solid lightblue",fontSize:'20px', width:'90%' }}
-        type="text"
-        name="name"
-        placeholder=" Search by any field "
-        onChange={(e) => {
-          let value = e.target.value;
-          let newFilteredData = wholeData.filter((user) => {
-            if (value === "") return user;
-            else if (
-              user.name.includes(value) ||
-              user.email.includes(value) ||
-              user.role.includes(value)
-            ) {
-              return user;
-            }
-          });
-          setFilteredData(newFilteredData);
-          if (newFilteredData) setUsers(newFilteredData.slice(0, 10));
-        }}
-      />
+        <input
+          style={{
+            border: "2px solid lightblue",
+            fontSize: "20px",
+            width: "90%",
+          }}
+          type="text"
+          name="name"
+          placeholder=" Search by any field "
+          onChange={(e) => {
+            let value = e.target.value;
+            let newFilteredData = wholeData.filter((user) => {
+              if (value === "") return user;
+              else if (
+                user.name.includes(value) ||
+                user.email.includes(value) ||
+                user.role.includes(value)
+              ) {
+                return user;
+              }
+            });
+            setFilteredData(newFilteredData);
+            if (newFilteredData) setUsers(newFilteredData.slice(0, 10));
+          }}
+        />
       </div>
-     
 
-      <table style={{width:'90%',border:'1px solid lightblue',margin:'auto'}} className="mytable">
-        <tr>
-          <th>
-            <input
-              onChange={(e)=>handleCheckAll(e)}
-              type="checkbox"
-            />{" "}
-          </th>
-          <th>Name </th>
-          <th>Email </th>
-          <th> Role</th>
-          <th>Action</th>
-        </tr>
-
-        {users.map((user) => (
-          <tr key={user.id}>
-            <input
-              type="checkbox"
-              checked={user.checked}
-              onChange={(e)=>handleCheckUser(e,user)}
-            />
-
-            <td>
-              {" "}
-              {user.edit ? (
-                <input
-                  type="text"
-                  value={user.name}
-                  onChange={(e)=>handleNameChange(e,user)}
-                />
-              ) : (
-                user.name
-              )}{" "}
-            </td>
-            <td>
-              {" "}
-              {user.edit ? (
-                <input
-                  type="email"
-                  value={user.email}
-                  onChange={(e)=>handleEmailChange(e,user)}
-                />
-              ) : (
-                user.email
-              )}{" "}
-            </td>
-            <td> {user.edit?<select value={user.role}
-             onChange={(e)=>handleRoleChange(e,user)}
-            >
-               <option value="member">member</option>
-               <option value="admin">admin</option>
-            </select>:user.role} </td>
-            <td className="btn">
-              {user.edit ? (
-                <button className="save" onClick={() => saveUserDetails(user.id)}>
-                  {" "}
-                  <AiFillSave />{" "}
-                </button>
-              ) : (
-                <button className="edit" onClick={() => editUserDetails(user.id)}>
-                  {" "}
-                  <AiFillEdit />{" "}
-                </button>
-              )}
-              <button className="delete" onClick={() => deleteUser(user.id)}>
-                {" "}
-                <AiFillDelete />{" "}
-              </button>
-            </td>
+      <table
+        style={{ width: "90%", border: "1px solid lightblue", margin: "auto" }}
+        className="mytable"
+      >
+        <thead>
+          <tr>
+            <th>
+              <input onChange={(e) => handleCheckAll(e)} type="checkbox" />{" "}
+            </th>
+            <th>Name </th>
+            <th>Email </th>
+            <th> Role</th>
+            <th>Action</th>
           </tr>
-        ))}
+        </thead>
 
-        <button
-          className="deleteSelected"
-          onClick={handleDeleteSelected}
-          style={{ border: "none", color: "red",cursor:'pointer' }}
-        >
-          Delete Selected
-        </button>
+        <tbody>
+          {users.map((user) => (
+            <tr key={user.id}>
+              <td>
+                <input
+                  type="checkbox"
+                  checked={user?.checked?true:false}
+                  onChange={(e) => handleCheckUser(e, user)}
+                />
+              </td>
+              <td>
+                {" "}
+                {user.edit ? (
+                  <input
+                    type="text"
+                    value={user.name?user.name:''}
+                    onChange={(e) => handleNameChange(e, user)}
+                  />
+                ) : (
+                  user.name
+                )}{" "}
+              </td>
+              <td>
+                {" "}
+                {user.edit ? (
+                  <input
+                    type="email"
+                    value={user.email?user.email:""}
+                    onChange={(e) => handleEmailChange(e, user)}
+                  />
+                ) : (
+                  user.email
+                )}{" "}
+              </td>
+              <td>
+                {" "}
+                {user.edit ? (
+                  <select
+                    value={user.role?user.role:''}
+                    onChange={(e) => handleRoleChange(e, user)}
+                  >
+                    <option value="member">member</option>
+                    <option value="admin">admin</option>
+                  </select>
+                ) : (
+                  user.role
+                )}{" "}
+              </td>
+              <td className="btn">
+                {user.edit ? (
+                  <button
+                    className="save"
+                    onClick={() => saveUserDetails(user.id)}
+                  >
+                    {" "}
+                    <AiFillSave />{" "}
+                  </button>
+                ) : (
+                  <button
+                    className="edit"
+                    onClick={() => editUserDetails(user.id)}
+                  >
+                    {" "}
+                    <AiFillEdit />{" "}
+                  </button>
+                )}
+                <button className="delete" onClick={() => deleteUser(user.id)}>
+                  {" "}
+                  <AiFillDelete />{" "}
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+        <thead>
+          <tr>
+            <th>
+              <button
+                className="deleteSelected"
+                onClick={handleDeleteSelected}
+                style={{ border: "none", color: "red", cursor: "pointer" }}
+              >
+                Delete Selected
+              </button>
+            </th>
+          </tr>
+        </thead>
       </table>
       <br />
       <br />
-      <MyPagination data={filteredData} setUsers={setUsers} count={10} />
+      <MyPagination data={filteredData} setUsers={setUsers} paginationCount={10} />
     </div>
   );
 }
