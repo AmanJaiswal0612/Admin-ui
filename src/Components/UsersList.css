@@ -1,0 +1,93 @@
+.box {
+  width: 100%;
+  text-align: center;
+
+}
+.box input {
+  width: 65%;
+}
+
+.mytable {
+  width: 65%;
+  margin: auto;
+  background-color: rgb(241, 241, 236);
+  /* display: flex; */
+}
+.mytable tr {
+  width: 80%;
+  border: 1px solid lightblue;
+}
+.mytable tr:hover {
+  background-color: lightblue;
+}
+.mytable tr th {
+  width: 28%;
+  border: 1px solid lightblue;
+}
+.pagination {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  gap: 2%;
+  text-decoration: none;
+  list-style: none;
+  margin: auto;
+  cursor: pointer;
+}
+
+.btn {
+  display: flex;
+  gap: 0.3%;
+}
+@media only screen and (min-width: 400px) {
+  .box {
+    width: 100%;
+    text-align: center;
+  }
+  .box input {
+    width: 65%;
+  }
+
+  .mytable {
+    width: 65%;
+    margin: auto;
+
+    /* display: flex; */
+  }
+  .pagination {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    gap: 2%;
+    text-decoration: none;
+    list-style: none;
+    margin: auto;
+    cursor: pointer;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .box {
+    width: 100%;
+    text-align: center;
+  }
+  .box input {
+    width: 65%;
+  }
+
+  .mytable {
+    width: 65%;
+    margin: auto;
+
+    /* display: flex; */
+  }
+  .pagination {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    gap: 2%;
+    text-decoration: none;
+    list-style: none;
+    margin: auto;
+    cursor: pointer;
+  }
+}
