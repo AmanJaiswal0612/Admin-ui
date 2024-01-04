@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Users.css";
+import "../css/Users.css";
 import "antd/dist/antd.css";
 import { AiFillDelete, AiFillEdit, AiFillSave } from "react-icons/ai";
 import MyPagination from "./Pagination";
@@ -305,7 +305,7 @@ function UsersList() {
       </table>
       <br />
       <br />
-      <MyPagination data={filteredData} setUsers={setUsers} paginationCount={10} />
+      <MyPagination usersData={filteredData} setUsers={setUsers} paginationCount={10} />
     </div>
   );
 }

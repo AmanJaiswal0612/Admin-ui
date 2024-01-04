@@ -1,48 +1,47 @@
 import React, { useEffect, useState } from 'react'
 
-const MyPagination = ({ data, setUsers, paginationCount }) => {
+const MyPagination = ({ usersData, setUsers, paginationCount }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   // debugger
-  const totalPages = Math.ceil(data.length / paginationCount);
+  const totalPages = Math.ceil(usersData.length / paginationCount);
 
   useEffect(() => {
     setSelectedIndex(0);
-  }, [data.length]);
+  }, [usersData.length]);
 
   const handlePrevClick = () => {
     if (selectedIndex > 0) {
-      const selcetedUsers = data.slice(
+      const selcetedUsers = usersData.slice(
         (selectedIndex - 1) * paginationCount,
         (selectedIndex - 1) * paginationCount + paginationCount
       );
       setUsers(selcetedUsers);
 
-      setSelectedIndex((prevState) => {
-        return prevState - 1;
+      setSelectedIndex((prevSelectedIndex) => {
+        return prevSelectedIndex - 1;
       });
     }
   };
 
   const handleNextClick = () => {
     if (selectedIndex < totalPages - 1) {
-      const selcetedUsers = data.slice(
+      const selcetedUsers = usersData.slice(
         (selectedIndex + 1) * paginationCount,
         (selectedIndex + 1) * paginationCount + paginationCount
       );
       setUsers(selcetedUsers);
-      setSelectedIndex((prevState) => {
-        return prevState + 1;
+      setSelectedIndex((prevSelectedIndex) => {
+        return prevSelectedIndex + 1;
       });
     }
   };
 
   const handleNavigatePage = (idx) => {
-    const selcetedUsers = data.slice(
+    const selcetedUsers = usersData.slice(
       idx * paginationCount,
       idx * paginationCount + paginationCount
     );
     setUsers(selcetedUsers);
-    console.log(data, selcetedUsers);
     setSelectedIndex(idx);
   };
 
